@@ -174,6 +174,29 @@ App checks for updates on every startup:
 
 ---
 
+## Documentation Sync Rules
+
+Every change must keep docs up to date:
+
+| If you change… | You must update… |
+|----------------|------------------|
+| Code logic, UI layout, architecture | `AGENTS.md` (architecture, design rules) |
+| Dependencies, AGP, Gradle, SDK | `README.md` (tech stack table) + `AGENTS.md` (tech stack) |
+| CI workflows, release process | `README.md` (CI/CD section, badges) + `AGENTS.md` (workflow rules) |
+| Features, behavior | `README.md` (features list) + `AGENTS.md` (design rules) |
+| App icon, screenshots | `README.md` (preview section) |
+| Version scheme | `README.md` + `AGENTS.md` (version scheme) |
+| Team info, signing key | `AGENTS.md` (team section) |
+
+**Release checklist** (before triggering release workflow):
+1. Bump version in `README.md` if needed
+2. Update feature list if new functionality added
+3. Update CI/CD section if workflow changed
+4. Verify `AGENTS.md` reflects current architecture
+5. Commit docs changes **before** triggering release
+
+---
+
 ## Team
 
 - **Developer:** yudibilly
