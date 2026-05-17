@@ -27,6 +27,8 @@
 - **⚡ Real-time calculation** — Hasil langsung muncul saat mengetik
 - **📐 Pythagoras theorem** — C = √(A² + B²)
 - **📏 Multi-unit output** — Milimeter (mm), Sentimeter (cm), Meter (m)
+- **🎨 Custom Canvas triangle** — Dynamic labels update real-time
+- **🧩 Modular architecture** — domain/utils/ui layers separated
 - **🌙 Dark mode support** — Otomatis mengikuti sistem
 - **📱 Minimal UI** — Fokus pada fungsi utama
 - **🔄 In-app update** — Notifikasi update otomatis dari GitHub Releases
@@ -45,6 +47,8 @@
 | ViewBinding | ✅ |
 | Material 3 | ✅ |
 | ConstraintLayout | ✅ |
+| Custom View (Canvas) | ✅ |
+| Design Token System | ✅ |
 
 ---
 
@@ -54,14 +58,20 @@
 app/
 ├── src/main/
 │   ├── java/com/example/my_mobile_app/
-│   │   ├── MainActivity.kt          # Activity utama + kalkulasi
+│   │   ├── MainActivity.kt          # UI orchestration
+│   │   ├── ui/
+│   │   │   └── TriangleView.kt      # Custom Canvas triangle
+│   │   ├── domain/
+│   │   │   └── PythagorasCalculator.kt  # Pure math
+│   │   ├── utils/
+│   │   │   └── NumberFormatter.kt   # Locale formatting
 │   │   └── updater/
-│   │       └── AppUpdater.kt        # Update checker GitHub
+│   │       └── AppUpdater.kt        # GitHub update checker
 │   ├── res/
-│   │   ├── drawable/                 # Vector icons & diagram
+│   │   ├── drawable/                 # Vector icons
 │   │   ├── layout/
 │   │   │   └── activity_main.xml    # UI utama
-│   │   ├── values/                   # Tema, warna, string
+│   │   ├── values/                   # Tema, warna, string, dimens, typography, shapes, attrs
 │   │   └── values-night/            # Dark theme
 │   └── AndroidManifest.xml
 ├── build.gradle.kts
@@ -75,7 +85,6 @@ app/
 | Workflow | Trigger | Output |
 |----------|---------|--------|
 | **Android CI** | Push / PR ke `main` | Debug APK + unit test |
-| **Emulator Tests** | Setelah CI sukses | Instrumentation test + logcat |
 | **Release Build** | Workflow dispatch / tag `v*` | Signed APK + AAB + GitHub Release |
 
 ### Build di Cloud, Beban Nol di Laptop

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="TriangleView">
+    <attr name="themeColor" format="color" />
+    <attr name="accentColor" format="color" />
+    <attr name="resultColor" format="color" />
+    <attr name="surfaceColor" format="color" />
+    <attr name="labelColor" format="color" />
+  </declare-styleable>
+</resources>

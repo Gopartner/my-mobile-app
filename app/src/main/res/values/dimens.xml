@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <dimen name="padding_small">8dp</dimen>
-  <dimen name="padding_medium">16dp</dimen>
-  <dimen name="padding_large">24dp</dimen>
-  <dimen name="corner_radius">12dp</dimen>
+  <dimen name="space_xxs">4dp</dimen>
+  <dimen name="space_xs">8dp</dimen>
+  <dimen name="space_sm">12dp</dimen>
+  <dimen name="space_md">16dp</dimen>
+  <dimen name="space_lg">20dp</dimen>
+  <dimen name="space_xl">24dp</dimen>
+  <dimen name="radius_sm">8dp</dimen>
+  <dimen name="radius_md">12dp</dimen>
+  <dimen name="radius_lg">16dp</dimen>
+  <dimen name="radius_xl">24dp</dimen>
+  <dimen name="triangle_height">120dp</dimen>
 </resources>

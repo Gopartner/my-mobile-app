@@ -41,16 +41,32 @@
 ## Architecture
 
 ```
-MainActivity.kt
-  ├─ onCreate()        → setup binding + TextWatcher + checkUpdate()
-  ├─ calculate()       → sqrt(A² + B²), update 3 TextViews
-  ├─ clearResults()    → reset to "-"
-  └─ formatNumber()    → locale-aware number formatting
+MainActivity.kt              (ui layer — orchestration only)
+  ├─ onCreate()              → setup binding + TextWatcher + checkUpdate()
+  ├─ calculate()             → PythagorasCalculator + NumberFormatter + update 3 TextViews + TriangleView
+  ├─ clearResults()          → reset to "-"
+  └─ checkUpdate()           → AppUpdater
 
-AppUpdater.kt
-  ├─ check(callback)   → Thread: GET GitHub API, parse JSON, compare versionCode
-  ├─ showUpdateDialog() → AlertDialog with download button
-  ├─ downloadAndInstall() → Thread: download APK to cache, FileProvider install
+ui/
+  ├─ MainActivity.kt         — entry point, input listener, rendering
+  └─ TriangleView.kt         — custom Canvas View (animated triangle with labels)
+
+domain/
+  └─ PythagorasCalculator.kt— pure math: sqrt(A² + B²), returns PythagorasResult(mm/cm/m)
+
+utils/
+  └─ NumberFormatter.kt      — locale-aware number formatting
+
+data/
+  └─ updater/AppUpdater.kt   — GitHub API check, download, install
+
+design/
+  ├─ res/values/typography.xml — TextAppearance.App.* styles
+  ├─ res/values/shapes.xml     — ShapeAppearance.App.* styles
+  ├─ res/values/attrs.xml      — TriangleView custom attributes
+  ├─ res/values/dimens.xml     — systematic spacing/radius tokens
+  ├─ res/values/colors.xml     — light color palette
+  └─ res/values-night/         — dark color palette overrides
 ```
 
 ---
@@ -62,7 +78,6 @@ AppUpdater.kt
 | Workflow | When |
 |----------|------|
 | `Android CI` | Push / PR to `main` or `develop` |
-| `Emulator Tests` | After Android CI completes |
 | `Release Build` | Manual `workflow_dispatch` or tag `v*` push |
 
 ### Release Process
@@ -137,17 +152,20 @@ App checks for updates on every startup:
 
 | Path | Purpose |
 |------|---------|
-| `app/src/main/java/.../MainActivity.kt` | Main logic |
+| `app/src/main/java/.../MainActivity.kt` | UI orchestration |
+| `app/src/main/java/.../ui/TriangleView.kt` | Custom Canvas triangle |
+| `app/src/main/java/.../domain/PythagorasCalculator.kt` | Pure math logic |
+| `app/src/main/java/.../utils/NumberFormatter.kt` | Number formatting |
 | `app/src/main/java/.../updater/AppUpdater.kt` | Auto-update |
 | `app/src/main/res/layout/activity_main.xml` | Full UI |
-| `app/src/main/res/values/` | Colors, strings, themes |
+| `app/src/main/res/values/` | Colors, strings, themes, typography, shapes, attrs, dimens |
 | `app/src/main/res/values-night/` | Dark mode overrides |
-| `app/src/main/res/drawable/` | Vector drawables (triangle, icon) |
+| `app/src/main/res/drawable/` | Vector drawables (icon) |
 | `app/build.gradle.kts` | Module build config |
 | `build.gradle.kts` | Root plugin declarations |
 | `gradle/libs.versions.toml` | Version catalog |
 | `.github/workflows/android.yml` | Debug CI |
-| `.github/workflows/emulator.yml` | Instrumented tests |
+| `.github/workflows/emulator.disabled.yml` | (disabled) Instrumented tests |
 | `.github/workflows/release.yml` | Release build + signing |
 | `gradle/wrapper/gradle-wrapper.properties` | Gradle distribution |
 
@@ -161,7 +179,11 @@ App checks for updates on every startup:
 - **Green card** for results (`@color/result_surface`)
 - **Blue** for side A, **Orange** for side B, **Green** for hypotenuse C
 - **Real-time** — every keystroke triggers `calculate()`
-- **Triangle diagram** uses `@drawable/triangle_diagram` vector
+- **Triangle diagram** uses custom `TriangleView` (Canvas-based) with dynamic labels
+- **Design tokens** centralized in `res/values/dimens.xml` (spacing `space_*`, radius `radius_*`)
+- **Typography** defined in `res/values/typography.xml` (`TextAppApp*`)
+- **Shape** defined in `res/values/shapes.xml` (`ShapeAppOverlay*`)
+- **Card styles** defined as reusable `Widget.App.*Card` in themes
 
 ---
 

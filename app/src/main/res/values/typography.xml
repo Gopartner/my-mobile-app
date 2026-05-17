@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="TextAppAppTitle" parent="TextAppearance.Material3.HeadlineSmall">
+    <item name="android:textColor">@color/on_background</item>
+    <item name="android:gravity">center</item>
+  </style>
+
+  <style name="TextAppAppResultValue" parent="TextAppearance.Material3.HeadlineLarge">
+    <item name="android:textStyle">bold</item>
+    <item name="android:gravity">center</item>
+  </style>
+
+  <style name="TextAppAppResultLabel" parent="TextAppearance.Material3.BodySmall">
+    <item name="android:gravity">center</item>
+  </style>
+
+  <style name="TextAppAppInputLabel" parent="TextAppearance.Material3.LabelMedium">
+    <item name="android:textStyle">bold</item>
+  </style>
+</resources>

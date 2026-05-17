@@ -5,8 +5,10 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import com.example.my_mobile_app.databinding.ActivityMainBinding
+import com.example.my_mobile_app.domain.PythagorasCalculator
+import com.example.my_mobile_app.ui.TriangleView
 import com.example.my_mobile_app.updater.AppUpdater
-import kotlin.math.sqrt
+import com.example.my_mobile_app.utils.NumberFormatter
 
 class MainActivity : AppCompatActivity() {
   private lateinit var binding: ActivityMainBinding
@@ -40,18 +42,20 @@ class MainActivity : AppCompatActivity() {
     val a = binding.inputA.text.toString().toDoubleOrNull() ?: 0.0
     val b = binding.inputB.text.toString().toDoubleOrNull() ?: 0.0
 
-    if (a <= 0 || b <= 0) {
+    val result = PythagorasCalculator.calculate(a, b)
+    if (result == null) {
       clearResults()
       return
     }
 
-    val cCm = sqrt(a * a + b * b)
-    val cMm = cCm * 10
-    val cM = cCm / 100
+    binding.resultMm.text = NumberFormatter.format(result.cMm)
+    binding.resultCm.text = NumberFormatter.format(result.cCm)
+    binding.resultM.text = NumberFormatter.format(result.cM)
 
-    binding.resultMm.text = formatNumber(cMm)
-    binding.resultCm.text = formatNumber(cCm)
-    binding.resultM.text = formatNumber(cM)
+    binding.triangle.sideA = NumberFormatter.format(a)
+    binding.triangle.sideB = NumberFormatter.format(b)
+    binding.triangle.sideC = NumberFormatter.format(result.cCm)
+    binding.triangle.invalidate()
   }
 
   private fun clearResults() {
@@ -59,13 +63,9 @@ class MainActivity : AppCompatActivity() {
     binding.resultMm.text = dash
     binding.resultCm.text = dash
     binding.resultM.text = dash
-  }
-
-  private fun formatNumber(value: Double): String {
-    return if (value == value.toLong().toDouble()) {
-      "%,d".format(value.toLong())
-    } else {
-      "%,.2f".format(value)
-    }
+    binding.triangle.sideA = getString(R.string.side_a)
+    binding.triangle.sideB = getString(R.string.side_b)
+    binding.triangle.sideC = getString(R.string.side_c)
+    binding.triangle.invalidate()
   }
 }

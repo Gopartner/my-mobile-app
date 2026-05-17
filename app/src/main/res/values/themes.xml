@@ -3,7 +3,28 @@
   <style name="Theme.my_mobile_app" parent="Theme.Material3.DayNight.NoActionBar">
     <item name="colorPrimary">@color/primary</item>
     <item name="colorOnPrimary">@color/on_primary</item>
+    <item name="colorSecondary">@color/accent</item>
+    <item name="colorTertiary">@color/result</item>
     <item name="colorSurface">@color/surface</item>
     <item name="colorOnSurface">@color/on_surface</item>
+    <item name="colorOnSurfaceVariant">@color/on_surface_secondary</item>
+    <item name="android:colorBackground">@color/background</item>
+    <item name="colorOnBackground">@color/on_background</item>
+  </style>
+
+  <style name="Widget.App.TriangleCard" parent="Widget.Material3.CardView.Filled">
+    <item name="shapeAppearanceOverlay">@style/ShapeAppOverlayCard</item>
+    <item name="cardElevation">2dp</item>
+  </style>
+
+  <style name="Widget.App.ResultCard" parent="Widget.Material3.CardView.Filled">
+    <item name="shapeAppearanceOverlay">@style/ShapeAppOverlayCard</item>
+    <item name="cardElevation">2dp</item>
+    <item name="cardBackgroundColor">@color/result_surface</item>
+  </style>
+
+  <style name="Widget.App.InputCard" parent="Widget.Material3.CardView.Filled">
+    <item name="shapeAppearanceOverlay">@style/ShapeAppOverlayCard</item>
+    <item name="cardElevation">2dp</item>
   </style>
 </resources>

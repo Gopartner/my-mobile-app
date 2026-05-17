@@ -8,16 +8,14 @@
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20dp">
+    android:padding="@dimen/space_lg">
 
     <TextView
       android:id="@+id/title"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:gravity="center"
       android:text="@string/app_title"
-      android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
-      android:textColor="@color/on_background"
+      android:textAppearance="@style/TextAppAppTitle"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
@@ -26,8 +24,7 @@
       android:id="@+id/subtitle"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:gravity="center"
-      android:paddingTop="4dp"
+      android:paddingTop="@dimen/space_xxs"
       android:text="@string/formula"
       android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
       android:textColor="@color/primary"
@@ -39,10 +36,8 @@
       android:id="@+id/diagram_card"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginTop="20dp"
-      app:cardCornerRadius="16dp"
-      app:cardElevation="2dp"
-      app:cardBackgroundColor="@color/surface"
+      android:layout_marginTop="@dimen/space_lg"
+      style="@style/Widget.App.TriangleCard"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/subtitle">
@@ -50,55 +45,20 @@
       <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="@dimen/space_md">
 
-        <ImageView
+        <com.example.my_mobile_app.ui.TriangleView
           android:id="@+id/triangle"
           android:layout_width="0dp"
-          android:layout_height="100dp"
-          android:contentDescription="@string/app_title"
-          android:scaleType="fitCenter"
-          android:src="@drawable/triangle_diagram"
+          android:layout_height="@dimen/triangle_height"
+          app:themeColor="@color/primary"
+          app:accentColor="@color/accent"
+          app:resultColor="@color/result"
+          app:surfaceColor="@color/surface"
+          app:labelColor="@color/on_surface"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-          android:id="@+id/label_a"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/side_a"
-          android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-          android:textColor="@color/primary"
-          android:textStyle="bold"
-          app:layout_constraintBottom_toBottomOf="@id/triangle"
-          app:layout_constraintStart_toStartOf="@id/triangle"
-          app:layout_constraintTop_toTopOf="@id/triangle" />
-
-        <TextView
-          android:id="@+id/label_b"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:paddingStart="4dp"
-          android:text="@string/side_b"
-          android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-          android:textColor="@color/accent"
-          android:textStyle="bold"
-          app:layout_constraintEnd_toEndOf="@id/triangle"
-          app:layout_constraintTop_toTopOf="@id/triangle" />
-
-        <TextView
-          android:id="@+id/label_c"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:paddingTop="4dp"
-          android:text="@string/side_c"
-          android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-          android:textColor="@color/result"
-          android:textStyle="bold"
-          app:layout_constraintBottom_toBottomOf="@id/triangle"
-          app:layout_constraintEnd_toEndOf="@id/triangle"
-          app:layout_constraintStart_toStartOf="@id/triangle" />
 
       </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -107,10 +67,8 @@
       android:id="@+id/result_card"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginTop="16dp"
-      app:cardCornerRadius="16dp"
-      app:cardElevation="2dp"
-      app:cardBackgroundColor="@color/result_surface"
+      android:layout_marginTop="@dimen/space_md"
+      style="@style/Widget.App.ResultCard"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/diagram_card">
@@ -118,7 +76,7 @@
       <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp">
+        android:padding="@dimen/space_lg">
 
         <TextView
           android:id="@+id/result_label"
@@ -136,12 +94,11 @@
           android:id="@+id/result_mm"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:layout_marginTop="12dp"
+          android:layout_marginTop="@dimen/space_sm"
           android:gravity="center"
           android:text="@string/result_placeholder"
-          android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+          android:textAppearance="@style/TextAppAppResultValue"
           android:textColor="@color/on_result_surface"
-          android:textStyle="bold"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/result_label" />
@@ -152,7 +109,7 @@
           android:layout_height="wrap_content"
           android:gravity="center"
           android:text="@string/unit_mm"
-          android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+          android:textAppearance="@style/TextAppAppResultLabel"
           android:textColor="@color/on_result_surface_secondary"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
@@ -162,7 +119,7 @@
           android:id="@+id/result_cm"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:layout_marginTop="12dp"
+          android:layout_marginTop="@dimen/space_sm"
           android:gravity="center"
           android:text="@string/result_placeholder"
           android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
@@ -178,7 +135,7 @@
           android:layout_height="wrap_content"
           android:gravity="center"
           android:text="@string/unit_cm"
-          android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+          android:textAppearance="@style/TextAppAppResultLabel"
           android:textColor="@color/on_result_surface_secondary"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
@@ -188,7 +145,7 @@
           android:id="@+id/result_m"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:layout_marginTop="12dp"
+          android:layout_marginTop="@dimen/space_sm"
           android:gravity="center"
           android:text="@string/result_placeholder"
           android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
@@ -204,7 +161,7 @@
           android:layout_height="wrap_content"
           android:gravity="center"
           android:text="@string/unit_m"
-          android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+          android:textAppearance="@style/TextAppAppResultLabel"
           android:textColor="@color/on_result_surface_secondary"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
@@ -217,10 +174,8 @@
       android:id="@+id/input_card"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginTop="16dp"
-      app:cardCornerRadius="16dp"
-      app:cardElevation="2dp"
-      app:cardBackgroundColor="@color/surface"
+      android:layout_marginTop="@dimen/space_md"
+      style="@style/Widget.App.InputCard"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/result_card">
@@ -228,7 +183,7 @@
       <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp">
+        android:padding="@dimen/space_lg">
 
         <com.google.android.material.textfield.TextInputLayout
           android:id="@+id/input_a_layout"
@@ -254,7 +209,7 @@
           android:id="@+id/input_b_layout"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:layout_marginTop="12dp"
+          android:layout_marginTop="@dimen/space_sm"
           android:hint="@string/hint_b"
           app:endIconMode="clear_text"
           app:layout_constraintEnd_toEndOf="parent"
