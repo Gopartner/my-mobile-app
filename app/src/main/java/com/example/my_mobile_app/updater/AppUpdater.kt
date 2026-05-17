@@ -50,7 +50,8 @@ class AppUpdater(private val context: Context) {
     val body = conn.inputStream.bufferedReader().readText()
     val json = JSONObject(body)
     val tagName = json.getString("tag_name")
-    val remoteCode = tagName.filter { it.isDigit() }.toLongOrNull() ?: return null
+    // tag format: v1.0.<run_number>
+    val remoteCode = tagName.substringAfterLast(".").toLongOrNull() ?: return null
 
     val assets = json.getJSONArray("assets")
     var apkUrl: String? = null
