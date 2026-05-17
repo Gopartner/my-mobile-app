@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">my-mobile-app</string>
+  <string name="app_name">Pythagoras</string>
+  <string name="app_title">Pythagoras Calculator</string>
+  <string name="formula">a² + b² = c²</string>
+  <string name="side_a">a</string>
+  <string name="side_b">b</string>
+  <string name="side_c">c (hipotenusa)</string>
+  <string name="hint_a">Sisi A</string>
+  <string name="hint_b">Sisi B</string>
+  <string name="result_title">Panjang Sisi C</string>
+  <string name="result_placeholder">-</string>
+  <string name="unit_mm">milimeter (mm)</string>
+  <string name="unit_cm">sentimeter (cm)</string>
+  <string name="unit_m">meter (m)</string>
+  <string name="input_empty">0</string>
 </resources>
