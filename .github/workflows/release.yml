@@ -33,7 +33,6 @@ jobs:
         run: chmod +x gradlew
 
       - name: Generate keystore
-        if: secrets.SIGNING_KEY == ''
         run: |
           keytool -genkeypair -v \
             -keystore app/keystore.jks \
@@ -49,18 +48,7 @@ jobs:
       - name: Build release APK & AAB
         run: ./gradlew assembleRelease bundleRelease
 
-      - name: Sign APK (production key)
-        if: secrets.SIGNING_KEY != ''
-        uses: r0adkll/sign-android-release@v1
-        with:
-          releaseDirectory: app/build/outputs/apk/release
-          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-          alias: ${{ secrets.KEY_ALIAS }}
-          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
-
-      - name: Sign APK (auto-generated key)
-        if: secrets.SIGNING_KEY == ''
+      - name: Sign APK
         uses: r0adkll/sign-android-release@v1
         with:
           releaseDirectory: app/build/outputs/apk/release
