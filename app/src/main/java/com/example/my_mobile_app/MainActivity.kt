@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import com.example.my_mobile_app.databinding.ActivityMainBinding
+import com.example.my_mobile_app.updater.AppUpdater
 import kotlin.math.sqrt
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +24,16 @@ class MainActivity : AppCompatActivity() {
 
     binding.inputA.addTextChangedListener(watcher)
     binding.inputB.addTextChangedListener(watcher)
+
+    checkUpdate()
+  }
+
+  private fun checkUpdate() {
+    AppUpdater(this).check { release ->
+      if (release != null) {
+        AppUpdater(this).showUpdateDialog(release)
+      }
+    }
   }
 
   private fun calculate() {

@@ -47,6 +47,14 @@ jobs:
           echo "KEY_ALIAS=yudibilly" >> $GITHUB_ENV
           echo "KEY_PASSWORD=android123" >> $GITHUB_ENV
 
+      - name: Patch versionCode & versionName
+        run: |
+          VCODE=${{ github.run_id }}
+          # update versionCode in app/build.gradle.kts
+          sed -i "s/versionCode = [0-9]*/versionCode = $VCODE/" app/build.gradle.kts
+          sed -i "s/versionName = \".*\"/versionName = \"1.0.$VCODE\"/" app/build.gradle.kts
+          echo "Version: 1.0.$VCODE (code $VCODE)"
+
       - name: Build release APK & AAB
         run: ./gradlew assembleRelease bundleRelease
 
