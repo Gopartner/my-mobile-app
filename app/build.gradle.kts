@@ -1,14 +1,14 @@
 plugins {
-  id("com.android.application")
-  id("org.jetbrains.kotlin.android")
+  alias(libs.plugins.android.application)
+  alias(libs.plugins.kotlin.android)
 }
 
 android {
-  namespace = "com.example.my-mobile-app"
+  namespace = "com.example.my_mobile_app"
   compileSdk = 35
 
   defaultConfig {
-    applicationId = "com.example.my-mobile-app"
+    applicationId = "com.example.my_mobile_app"
     minSdk = 24
     targetSdk = 35
     versionCode = 1
@@ -23,9 +23,7 @@ android {
         getDefaultProguardFile("proguard-android-optimize.txt"),
         "proguard-rules.pro"
       )
-    }
-    debug {
-      isDebuggable = true
+      signingConfig = signingConfigs.getByName("debug")
     }
   }
 
@@ -44,12 +42,13 @@ android {
 }
 
 dependencies {
-  implementation("androidx.core:core-ktx:1.15.0")
-  implementation("androidx.appcompat:appcompat:1.7.0")
-  implementation("androidx.activity:activity-ktx:1.9.3")
-  implementation("com.google.android.material:material:1.12.0")
+  implementation(libs.core.ktx)
+  implementation(libs.appcompat)
+  implementation(libs.activity.ktx)
+  implementation(libs.material)
+  implementation(libs.constraintlayout)
 
-  testImplementation("junit:junit:4.13.2")
-  androidTestImplementation("androidx.test.ext:junit:1.2.1")
-  androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+  testImplementation(libs.junit)
+  androidTestImplementation(libs.ext.junit)
+  androidTestImplementation(libs.espresso)
 }
